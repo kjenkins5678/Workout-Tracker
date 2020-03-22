@@ -19,14 +19,15 @@
   <body>
     <form action="/submit" method="post">
     <h1>Workout!</h1>
-    <h2>Enter a Note!</h2>
-      <input type="text" name="title" placeholder="Title">
-      <textarea type="text" name="body" placeholder="Write Note Here"></textarea>
+    <h2>Enter an Exercise!</h2>
+      <input type="text" name="name" placeholder="Exercise Name">
+      <input type="number" name="duration" placeholder="duration in minutes">
+      <input type="number" name="calories" placeholder="calories">
 
       <input type="submit">
-      <a href="/notes">See your notes!</a>
+      <a href="/exercises">See your exercises!</a>
       <a href="/workout">See your workouts!</a>
-      <a href="/populatedworkout">See your workout, populated with notes!</a>
+      <a href="/populatedworkout">See your workout, populated with exercises!</a>
     </form>
   </body>
 </html>

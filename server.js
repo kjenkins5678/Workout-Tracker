@@ -25,10 +25,10 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitness_tracker
 //     console.log(message);
 //   });
 
-app.get("/notes", (req, res) => {
-  db.Note.find({})
-    .then(dbNote => {
-      res.json(dbNote);
+app.get("/exercises", (req, res) => {
+  db.Exercise.find({})
+    .then(dbExercise => {
+      res.json(dbExercise);
     })
     .catch(err => {
       res.json(err);
@@ -46,8 +46,8 @@ app.get("/workout", (req, res) => {
 });
 
 app.post("/submit", ({ body }, res) => {
-  db.Note.create(body)
-    .then(({ _id }) => db.Workout.findOneAndUpdate({}, { $push: { notes: _id } }, { new: true }))
+  db.Exercise.create(body)
+    .then(({ _id }) => db.Workout.findOneAndUpdate({}, { $push: { exercises: _id } }, { new: true }))
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -58,7 +58,7 @@ app.post("/submit", ({ body }, res) => {
 
 app.get("/populatedworkout", (req, res) => {
   db.Workout.find({})
-    .populate("notes")
+    .populate("exercises")
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
