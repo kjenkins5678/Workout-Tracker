@@ -3,31 +3,28 @@
   <head>
     <meta charset="UTF-8">
     <title>Populate Exercise</title>
-    <style>
-      input {
-        display: block;
-        height: 36px;
-        width: 200px;
-        font-size: 24px;
-      }
-      textarea {
-        width: 200px;
-        height: 200px;
-      }
-    </style>
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
     <form action="/submit" method="post">
-    <h1>Workout!</h1>
-    <h2>Enter an Exercise!</h2>
+    <h1>Workout Tracker</h1>
+    <h2>Select Workout or Create New Workout</h2>
+    <div class="workouts">
+
+    </div>
+    <h3>Enter an Exercise</h3>
       <input type="text" name="name" placeholder="Exercise Name">
-      <input type="number" name="duration" placeholder="duration in minutes">
+      <input type="number" name="duration" placeholder="minutes">
       <input type="number" name="calories" placeholder="calories">
 
       <input type="submit">
-      <a href="/exercises">See your exercises!</a>
-      <a href="/workout">See your workouts!</a>
-      <a href="/populatedworkout">See your workout, populated with exercises!</a>
+
+      <div class="apiLinks">
+        <a href="/api/exercises">See your exercises!</a>
+        <a href="/api/workouts">See your workouts!</a>
+        <a href="/populatedworkout">See your workout, populated with exercises!</a>
+      </div>
     </form>
+    <script src="/index.js"></script>
   </body>
 </html>

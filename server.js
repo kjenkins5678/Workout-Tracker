@@ -1,6 +1,6 @@
-const express = require('express');
-const logger = require('morgan');
-const mongoose = require('mongoose');
+const express = require("express");
+const logger = require("morgan");
+const mongoose = require("mongoose");
 
 const PORT = process.env.PORT || 3000;
 
@@ -25,7 +25,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitness_tracker
 //     console.log(message);
 //   });
 
-app.get("/exercises", (req, res) => {
+app.get("/api/exercises", (req, res) => {
   db.Exercise.find({})
     .then(dbExercise => {
       res.json(dbExercise);
@@ -35,7 +35,7 @@ app.get("/exercises", (req, res) => {
     });
 });
 
-app.get("/workout", (req, res) => {
+app.get("/api/workouts", (req, res) => {
   db.Workout.find({})
     .then(dbWorkout => {
       res.json(dbWorkout);
