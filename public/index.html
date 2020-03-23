@@ -23,13 +23,13 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
+          <a class="nav-link" href="/api/workouts">Workouts API</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Services</a>
+          <a class="nav-link" href="/api/exercises">Exercises API</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link" href="/populatedworkout">All API</a>
         </li>
       </ul>
     </div>
@@ -48,62 +48,7 @@
     </header>
 
     <!-- Page Features -->
-    <div class="row text-center workouts">
-
-      <!-- <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
-          </div>
-        </div>
-      </div> -->
-
-    </div>
-    <!-- /.row -->
+    <div class="text-center workouts"></div>
 
   </div>
   <!-- /.container -->
@@ -111,28 +56,17 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+      <p class="m-0 text-center text-white">Copyright &copy; KJ 2020</p>
     </div>
     <!-- /.container -->
   </footer>
 
     <form action="/submit" method="post">
-    <h2>Select Workout or Create New Workout</h2>
-    <div class="workouts">
-
-    </div>
-    <h3>Enter an Exercise</h3>
+      <h3>Enter an Exercise</h3>
       <input type="text" name="name" placeholder="Exercise Name">
       <input type="number" name="duration" placeholder="minutes">
       <input type="number" name="calories" placeholder="calories">
-
       <input type="submit">
-
-      <div class="apiLinks">
-        <a href="/api/exercises">See your exercises!</a>
-        <a href="/api/workouts">See your workouts!</a>
-        <a href="/populatedworkout">See your workout, populated with exercises!</a>
-      </div>
     </form>
     <script src="/index.js"></script>
   </body>
