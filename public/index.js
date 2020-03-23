@@ -6,11 +6,22 @@ fetch("/api/workouts")
 
     const workoutContainer = document.querySelector(".workouts");
     data.forEach(workout => {
-      console.log(workout.name);
       const div = document.createElement("div");
+
       div.innerHTML = `
-        <h2>${workout.name}<h2>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+          <div class="card-body">
+            <h4 class="card-title">${workout.name}</h4>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary">Find Out More!</a>
+          </div>
+        </div>
+      </div>
       `;
-    workoutContainer.appendChild(div);
+      workoutContainer.appendChild(div);
     });
   });
