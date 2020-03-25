@@ -6,6 +6,7 @@ fetch("/api/workouts")
 
     const workoutContainer = document.querySelector(".workouts");
     data.forEach(workout => {
+
       const div = document.createElement("div");
 
       div.innerHTML = `
@@ -17,7 +18,7 @@ fetch("/api/workouts")
           </div>
           <div class="card-footer">
             <a href="#" class="btn btn-primary">Log</a>
-            <a href="/workout" class="btn btn-primary">Edit</a>
+            <a href="/workout?workout_id=${workout._id}" class="btn btn-primary">Edit</a>
           </div>
         </div>
       </div>

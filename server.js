@@ -76,6 +76,16 @@ app.get("/workout", function(req, res) {
   res.sendFile(path.join(__dirname, "./public/workout.html"));
 });
 
+app.get("/api/workouts/:_id", function(req, res){
+  db.Workout.findOne({
+    _id: req.params._id
+  }).then(oneWorkout => {
+    res.json(oneWorkout);
+  }).catch(err => {
+    res.status(400).json(err);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });
