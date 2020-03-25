@@ -17,7 +17,7 @@ fetch("/api/workouts")
           </div>
           <div class="card-footer">
             <a href="#" class="btn btn-primary">Log</a>
-            <a href="#" class="btn btn-primary">Edit</a>
+            <a href="/workout" class="btn btn-primary">Edit</a>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
+const path = require("path");
 
 const PORT = process.env.PORT || 3000;
 
@@ -65,6 +66,14 @@ app.get("/populatedworkout", (req, res) => {
     .catch(err => {
       res.json(err);
     });
+});
+
+app.get("/", function(req, res) {
+  res.sendFile(path.join(__dirname, "./public/index.html"));
+});
+
+app.get("/workout", function(req, res) {
+  res.sendFile(path.join(__dirname, "./public/workout.html"));
 });
 
 app.listen(PORT, () => {
