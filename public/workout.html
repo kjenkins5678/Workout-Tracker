@@ -5,6 +5,9 @@
 <title>Workout Tracker</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="/style.css" />
+<!-- jQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 </head>
 <body>
 
@@ -45,16 +48,16 @@
 <!-- Page Features -->
 
     <div class="text-center">
-        <form>
+        <form id="exercises" class="workouts">
             <div class="form-row">
                 <div class="col-7">
-                <input type="text" class="form-control" placeholder="Exercise">
+                <input type="text" class="form-control" placeholder="Exercise" id="exercise-name">
                 </div>
                 <div class="col">
-                <input type="text" class="form-control" placeholder="Duration">
+                <input type="text" class="form-control" placeholder="Duration" id="exercise-duration">
                 </div>
                 <div class="col">
-                <input type="text" class="form-control" placeholder="Calories">
+                <input type="text" class="form-control" placeholder="Calories" id="exercise-calories">
                 </div>
                 <div class="col-auto">
                     <button type="delete" class="btn btn-danger mb-2">Remove</button>
@@ -77,6 +80,6 @@
         </form>
     </div>
 </div>
-<script src="/index.js"></script>
+<script src="/workout.js"></script>
 </body>
 </html>
