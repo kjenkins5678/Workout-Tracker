@@ -51,7 +51,7 @@
         <form id="new-workouts" class="workouts">
             <div class="form-row">
                 <div class="col-7">
-                <input type="text" class="form-control" placeholder="Workout Name">
+                <input type="text" class="form-control" id="new-workout" placeholder="Workout Name">
                 </div>
                 <!-- <div class="col">
                 <input type="text" class="form-control" placeholder="Duration">
@@ -60,12 +60,14 @@
                 <input type="text" class="form-control" placeholder="Calories">
                 </div> -->
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-primary mb-2">Add</button>
+                    <button type="submit" class="btn btn-primary mb-2" id="add-workout">Add</button>
                 </div>
             </div>
         </form>
     </div>
+
+    <div class="workout-list"></div>
 </div>
-<script src="/workout.js"></script>
+<script src="/newWorkout.js"></script>
 </body>
 </html>

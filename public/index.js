@@ -4,13 +4,15 @@ fetch("/api/workouts")
   })
   .then(data => {
 
+    console.log(data.length);
+
     const workoutContainer = document.querySelector(".workouts");
     data.forEach(workout => {
 
       const div = document.createElement("div");
+      div.classList.add("col");
 
       div.innerHTML = `
-      <div class="col-lg-3 col-md-6 mb-4">
         <div class="card h-100">
           <div class="card-body">
             <h4 class="card-title">${workout.name}</h4>
@@ -21,7 +23,6 @@ fetch("/api/workouts")
             <a href="/workout?workout_id=${workout._id}" class="btn btn-primary">Edit</a>
           </div>
         </div>
-      </div>
       `;
       workoutContainer.appendChild(div);
     });
