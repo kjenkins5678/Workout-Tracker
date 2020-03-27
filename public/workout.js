@@ -9,10 +9,6 @@ $(document).ready(function() {
 
   var url = window.location.search;
 
-  var updating = false;
-
-  console.log("testing")
-
   if (url.indexOf("?workout_id=") !== -1) {
     postId = url.split("=")[1];
     getPostData(postId);
@@ -34,36 +30,22 @@ $(document).ready(function() {
         .val(),
       calories: exerciseCalories.val()
     };
-
-    // If we're updating a post run updatePost to update a post
-    // Otherwise run submitPost to create a whole new post
-    if (updating) {
-      newPost.id = postId;
-      updatePost(newPost);
-    }
-    else {
-      submitPost(newPost);
-    }
   }
 
   // Submits a new post and brings user to blog page upon completion
-  function submitPost(post) {
-    $.post("/api/posts", post, function() {
-      window.location.href = "/blog";
+  function submitPost() {
+    console.log("submit post working")
+    $.post("/api/exercises", function() {
     });
   }
 
   // Gets post data for the current post if we're editing, or if we're adding to an author's existing posts
   function getPostData(id) {
     var queryUrl = "/api/workouts/" + id;
+    console.log(queryUrl);
     $.get(queryUrl, function(data) {
       if (data) {
-        console.log(data.name);
-        // If this post exists, prefill our cms forms with its data
-
-        // If we have a post with this id, set a flag for us to know to update the post
-        // when we hit submit
-        updating = true;
+        console.log(data);
       }
     });
   }
@@ -79,4 +61,10 @@ $(document).ready(function() {
         console.log("posted update");
       });
   }
+
+  $("#exercises").on("submit", function(event) {
+    event.preventDefault();
+    console.log("button connected");
+    submitPost();
+  });
 });

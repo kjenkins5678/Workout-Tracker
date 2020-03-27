@@ -26,6 +26,17 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitness_tracker
 //     console.log(message);
 //   });
 
+// Add a workout
+app.post("/api/new/workouts", ({ body }, res) => {
+  db.Workout.create(body)
+    .then(newWorkout => {
+      res.json(newWorkout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
 app.get("/api/exercises", (req, res) => {
   db.Exercise.find({})
     .then(dbExercise => {
@@ -46,15 +57,16 @@ app.get("/api/workouts", (req, res) => {
     });
 });
 
-app.post("/submit", ({ body }, res) => {
-  db.Exercise.create(body)
-    .then(({ _id }) => db.Workout.findOneAndUpdate({}, { $push: { exercises: _id } }, { new: true }))
-    .then(dbWorkout => {
-      res.json(dbWorkout);
-    })
-    .catch(err => {
-      res.json(err);
-    });
+app.post("/api/workouts", (req, res) => {
+  console.log("hit route", req.body);
+  // db.Exercise.create(body)
+  //   .then(({ _id }) => db.Workout.findOneAndUpdate({}, { $push: { exercises: _id } }, { new: true }))
+  //   .then(dbWorkout => {
+  //     res.json(dbWorkout);
+  //   })
+  //   .catch(err => {
+  //     res.json(err);
+  //   });
 });
 
 app.get("/populatedworkout", (req, res) => {
@@ -75,6 +87,10 @@ app.get("/", function(req, res) {
 
 app.get("/workout", function(req, res) {
   res.sendFile(path.join(__dirname, "./public/workout.html"));
+});
+
+app.get("/workout/edit", function(req, res) {
+  res.sendFile(path.join(__dirname, "./public/newWorkout.html"));
 });
 
 app.get("/api/workouts/:_id", function(req, res){
