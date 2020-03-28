@@ -25,7 +25,7 @@ $(document).ready(function() {
 
         const div = document.createElement("div");
         div.classList.add("form-row");
-  
+
         div.innerHTML = `
           <div class="col-7">
             <input type="text" class="form-control" placeholder="${exercise.name}" id="exercise-name">
@@ -41,7 +41,7 @@ $(document).ready(function() {
            </div>
         `;
         exercisesSpot.prepend(div);
-        
+
       });
     });
 });
