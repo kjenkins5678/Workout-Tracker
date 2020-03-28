@@ -57,6 +57,7 @@ app.get("/api/workouts", (req, res) => {
     });
 });
 
+//fix-me
 app.post("/api/workouts", (req, res) => {
   console.log("hit route", req.body);
   // db.Exercise.create(body)
@@ -96,11 +97,12 @@ app.get("/workout/edit", function(req, res) {
 app.get("/api/workouts/:_id", function(req, res){
   db.Workout.findOne({
     _id: req.params._id
-  }).then(oneWorkout => {
-    res.json(oneWorkout);
-  }).catch(err => {
-    res.status(400).json(err);
-  });
+  }).populate("exercises")
+    .then(oneWorkout => {
+      res.json(oneWorkout);
+    }).catch(err => {
+      res.status(400).json(err);
+    });
 });
 
 app.listen(PORT, () => {

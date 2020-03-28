@@ -4,8 +4,6 @@ fetch("/api/workouts")
   })
   .then(data => {
 
-    console.log(data.length);
-
     const workoutContainer = document.querySelector(".workouts");
     data.forEach(workout => {
 
@@ -16,11 +14,10 @@ fetch("/api/workouts")
         <div class="card h-100">
           <div class="card-body">
             <h4 class="card-title">${workout.name}</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
           </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Log</a>
-            <a href="/workout?workout_id=${workout._id}" class="btn btn-primary">Edit</a>
+          <div class="card-footer text-center">
+            <a href="#" class="btn btn-primary mt-2">Log</a>
+            <a href="/workout?workout_id=${workout._id}" class="btn btn-primary mt-2">Edit</a>
           </div>
         </div>
       `;
