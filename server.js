@@ -91,22 +91,19 @@ app.get("/api/workouts/:_id", function(req, res){
 
 // delete api routes ******************************************************
 
-//Get a workout by id and populate it with its exercises
+//Find a workout by id and delete all exercises associated with it and delete the workout
 app.delete("/api/workouts/:_id", function(req, res){
-
-  db.Workout.findById(req.params._id)
-    .then(res => {
-      res[0].exercises.forEach(exerciseId => {
-        console.log(exerciseId);
-        db.Exercise.deleteOne({"_id": exerciseId}, function (err){
-          if (err) return handleError(err);
-        });
-      });
-    }).then(something => {
-      res.json(something);
-    }).catch(err => {
-      res.status(400).json(err);
+  db.Workout.findById(req.params._id, function(err, workout){
+    db.Exercise.remove({
+      "_id": {
+        $in: workout.exercises
+      }
+    }, function(err) {
+      if(err) return err;
+      workout.remove();
+      res.redirect("/");
     });
+  });
 });
 
 
