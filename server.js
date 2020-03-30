@@ -106,6 +106,22 @@ app.delete("/api/workouts/:_id", function(req, res){
   });
 });
 
+app.delete("/api/exercises/:_id", function(req, res){
+  db.Exercise.findByIdAndRemove(req.params._id, function(err){
+    if(err) return err;
+    db.Workout.update(
+      {
+        exercises: req.params._id
+      },{
+        $pull: {"exercises": req.params._id}
+      }, function(err) {
+        if (err) return err;
+        res.json();
+      }
+    );
+  });
+});
+
 
 //html routes *************************************************************
 
