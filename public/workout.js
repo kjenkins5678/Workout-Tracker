@@ -1,10 +1,24 @@
 $(document).ready(function() {
 
   var url = window.location.search;
+  var nameInput = $("#nameInput");
+  var durInput = $("#durationInput");
+  var caloriesInput = $("#caloriesInput");
+  var form = $("#exercises");
 
   if (url.indexOf("?workout_id=") !== -1) {
     workoutId = url.split("=")[1];
   }
+
+  function GetUserData() {
+    return userObject = {
+      name : nameInput.val(),
+      duration : durInput.val(),
+      calories : caloriesInput.val()
+    };
+  };
+
+  // Get exercises from api and display them on the page
 
   fetch(`/api/workouts/${workoutId}`)
     .then(response => {
@@ -44,4 +58,31 @@ $(document).ready(function() {
 
       });
     });
+
+  form.submit((e) => {
+    e.preventDefault();
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify(
+      {"name" : nameInput.val(),
+        "duration" : durInput.val(),
+        "calories" : caloriesInput.val()
+      });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    };
+
+    fetch(`/api/new/exercise/${workoutId}`, requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        console.log(result)
+      })
+      .catch(error => console.log("error", error));
+  });
+
 });
