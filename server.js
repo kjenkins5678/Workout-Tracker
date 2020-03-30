@@ -20,7 +20,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitness_tracker
 
 // post api routes *************************************************************
 
-
 // Add a workout
 app.post("/api/new/workouts", ({ body }, res) => {
   db.Workout.create(body)
@@ -32,9 +31,9 @@ app.post("/api/new/workouts", ({ body }, res) => {
     });
 });
 
-app.post("/api/new/exercise/:_id", ({ body }, res) => {
-  db.Exercise.create(body)
-    .then(({ _id }) => db.Workout.findOneAndUpdate({"_id" : req.params._id}, { $push: { exercises: _id } }, { new: true }))
+app.post("/api/new/exercise/:_id", (req, res) => {
+  db.Exercise.create(req.body)
+    .then(newExerciseObject => db.Workout.findOneAndUpdate({"_id" : req.params._id}, { $push: { exercises: newExerciseObject._id } }, { new: true }))
     .then(dbWorkout => {
       res.json(dbWorkout);
     })
@@ -42,7 +41,6 @@ app.post("/api/new/exercise/:_id", ({ body }, res) => {
       res.json(err);
     });
 });
-
 
 // get api routes *************************************************************
 
@@ -82,15 +80,35 @@ app.get("/populatedworkout", (req, res) => {
 
 //Get a workout by id and populate it with its exercises
 app.get("/api/workouts/:_id", function(req, res){
-  db.Workout.findOne({
-    _id: req.params._id
-  }).populate("exercises")
+  db.Workout.findById(
+    req.params._id).populate("exercises")
     .then(oneWorkout => {
       res.json(oneWorkout);
     }).catch(err => {
       res.status(400).json(err);
     });
 });
+
+// delete api routes ******************************************************
+
+//Get a workout by id and populate it with its exercises
+app.delete("/api/workouts/:_id", function(req, res){
+
+  db.Workout.findById(req.params._id)
+    .then(res => {
+      res[0].exercises.forEach(exerciseId => {
+        console.log(exerciseId);
+        db.Exercise.deleteOne({"_id": exerciseId}, function (err){
+          if (err) return handleError(err);
+        });
+      });
+    }).then(something => {
+      res.json(something);
+    }).catch(err => {
+      res.status(400).json(err);
+    });
+});
+
 
 //html routes *************************************************************
 
