@@ -55,9 +55,11 @@ $(document).ready(function() {
           `;
           exercisesSpot.append(div);
         });
+        const formDiv = document.createElement("div");
+        formDiv.classList.add("form-row");
 
         //html template for the input form fields
-        div.innerHTML = `
+        formDiv.innerHTML = `
         <div class="col-7">
               <input type="text" class="form-control" placeholder="Name" id="exercise-name">
             </div>
@@ -70,7 +72,8 @@ $(document).ready(function() {
             <div class="col-auto">
               <button type="submit" class="btn btn-primary mb-2" id="add">Add</button>
             </div>
-        `
+        `;
+        exercisesSpot.append(formDiv);
       });
   }
 
