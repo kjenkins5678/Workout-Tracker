@@ -1,9 +1,6 @@
 $(document).ready(function() {
 
   var url = window.location.search;
-  var nameInput = $("#nameInput");
-  var durInput = $("#durationInput");
-  var caloriesInput = $("#caloriesInput");
   var form = $("#exercises");
 
   if (url.indexOf("?workout_id=") !== -1) {
@@ -11,10 +8,6 @@ $(document).ready(function() {
   }
 
   // Get exercises from api and display them on the page
-
-  function clearForm() {
-    form.empty();
-  }
 
   function drawPage() {
 
@@ -33,7 +26,6 @@ $(document).ready(function() {
 
         //For each exercise...
         data.exercises.forEach(exercise => {
-          console.log(exercise.name, exercise.duration, exercise.calories);
 
           const div = document.createElement("div");
           div.classList.add("form-row");
@@ -79,8 +71,15 @@ $(document).ready(function() {
 
   drawPage();
 
+  //Click Events
+
   form.submit((e) => {
     e.preventDefault();
+
+    var nameInput = $("#exercise-name");
+    var durInput = $("#exercise-duration");
+    var caloriesInput = $("#exercise-calories");
+
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -100,8 +99,7 @@ $(document).ready(function() {
     fetch(`/api/new/exercise/${workoutId}`, requestOptions)
       .then(response => response.text())
       .then(result => {
-        console.log(result);
-        clearForm();
+        $("#exercises").empty();
         drawPage();
       })
       .catch(error => console.log("error", error));
