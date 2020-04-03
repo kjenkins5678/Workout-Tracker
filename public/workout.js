@@ -2,6 +2,7 @@ $(document).ready(function() {
 
   var url = window.location.search;
   var form = $("#exercises");
+  var workout_id = "";
 
   if (url.indexOf("?workout_id=") !== -1) {
     workoutId = url.split("=")[1];
@@ -42,7 +43,7 @@ $(document).ready(function() {
               <input type="text" class="form-control" value="${exercise.calories}" id="exercise-calories-${exercise._id}">
           </div>
             <div class="col-auto">
-              <button type="delete" class="btn btn-danger mb-2" id="exercise-${exercise._id}">Remove</button>
+              <button type="delete" class="btn btn-danger mb-2" id="${exercise._id}">Remove</button>
             </div>
           `;
           exercisesSpot.append(div);
@@ -73,7 +74,7 @@ $(document).ready(function() {
 
   //Click Events
 
-  form.submit((e) => {
+  $(document).on("click", ".btn-primary", (e) => {
     e.preventDefault();
 
     var nameInput = $("#exercise-name");
@@ -105,8 +106,23 @@ $(document).ready(function() {
       .catch(error => console.log("error", error));
   });
 
-  // $(".btn-danger").submit((e) => {
-  //   alert("Button Pressed");
-  // });
+  $(document).on("click", ".btn-danger", (e) => {
+    e.preventDefault();
+    console.log(e);
+    console.log(e.target.id);
+
+    var requestOptions = {
+      method: 'DELETE',
+      redirect: 'follow'
+    };
+
+    fetch(`http://localhost:3000/api/exercises/${e.target.id}`, requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+
+      //some code here to redraw the page
+
+  });
 
 });
