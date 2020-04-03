@@ -99,7 +99,7 @@ $(document).ready(function() {
 
     fetch(`/api/new/exercise/${workoutId}`, requestOptions)
       .then(response => response.text())
-      .then((result) => {
+      .then(() => {
         $("#exercises").empty();
         drawPage();
       })
@@ -118,10 +118,12 @@ $(document).ready(function() {
 
     fetch(`http://localhost:3000/api/exercises/${e.target.id}`, requestOptions)
       .then(response => response.text())
-      .then(result => console.log(result))
+      .then(() => {
+        //some code here to redraw the page
+        $("#exercises").empty();
+        drawPage();
+      })
       .catch(error => console.log('error', error));
-
-      //some code here to redraw the page
 
   });
 
