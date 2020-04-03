@@ -28,7 +28,7 @@ $(document).ready(function() {
         data.exercises.forEach(exercise => {
 
           const div = document.createElement("div");
-          div.classList.add("form-row");
+          div.classList.add("form-row", "oldItem");
 
           //html template for the values in the database
           div.innerHTML = `
@@ -48,7 +48,7 @@ $(document).ready(function() {
           exercisesSpot.append(div);
         });
         const formDiv = document.createElement("div");
-        formDiv.classList.add("form-row");
+        formDiv.classList.add("form-row", "newItem");
 
         //html template for the input form fields
         formDiv.innerHTML = `
@@ -98,11 +98,15 @@ $(document).ready(function() {
 
     fetch(`/api/new/exercise/${workoutId}`, requestOptions)
       .then(response => response.text())
-      .then(result => {
+      .then((result) => {
         $("#exercises").empty();
         drawPage();
       })
       .catch(error => console.log("error", error));
   });
+
+  // $(".btn-danger").submit((e) => {
+  //   alert("Button Pressed");
+  // });
 
 });
