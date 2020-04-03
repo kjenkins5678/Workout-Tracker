@@ -1,8 +1,6 @@
 $(document).ready(function() {
 
   var url = window.location.search;
-  var form = $("#exercises");
-  var workout_id = "";
 
   if (url.indexOf("?workout_id=") !== -1) {
     workoutId = url.split("=")[1];
@@ -112,8 +110,8 @@ $(document).ready(function() {
     console.log(e.target.id);
 
     var requestOptions = {
-      method: 'DELETE',
-      redirect: 'follow'
+      method: "DELETE",
+      redirect: "follow"
     };
 
     fetch(`http://localhost:3000/api/exercises/${e.target.id}`, requestOptions)
@@ -123,7 +121,7 @@ $(document).ready(function() {
         $("#exercises").empty();
         drawPage();
       })
-      .catch(error => console.log('error', error));
+      .catch(error => console.log("error", error));
 
   });
 
