@@ -1,17 +1,6 @@
 let transactions = [];
 let myChart;
 
-fetch("/api/log")
-  .then(response => {
-    return response.json();
-  })
-  .then(data => {
-    // save db data on global variable
-    transactions = data;
-    populateTable();
-    populateChart();
-  });
-
 function populateTable() {
   const tbody = document.querySelector("#tbody");
   tbody.innerHTML = "";
@@ -38,6 +27,7 @@ function populateChart() {
     const date = new Date(t.date);
     return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
   });
+
 
   // create incremental values for chart
   const data = reversed.map(t => {
@@ -67,6 +57,17 @@ function populateChart() {
     }
   });
 }
+
+fetch("/api/log")
+  .then(response => {
+    return response.json();
+  })
+  .then(data => {
+    // save db data on global variable
+    transactions = data;
+    populateTable();
+    populateChart();
+  });
 
 // function sendTransaction(isAdding) {
 //   const nameEl = document.querySelector("#t-name");
