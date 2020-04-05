@@ -55,8 +55,8 @@ app.post("/api/new/log/:_id", function(req, res){
     .then(aggResult => db.Log.create({
       name: aggResult[0]._id,
       calories: aggResult[0].totalCalories
-    })).then(dbLog => {
-      res.json(dbLog);
+    })).then(() => {
+      res.sendFile(path.join(__dirname, "./public/log.html"));
     })
     .catch(err => {
       res.json(err);
@@ -110,6 +110,7 @@ app.get("/api/workouts/:_id", function(req, res){
     });
 });
 
+//Get all log entries
 app.get("/api/log", function(req, res){
   db.Log.find({})
     .then(log => {

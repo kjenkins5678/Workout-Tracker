@@ -19,18 +19,20 @@ function populateTable() {
 
 function populateChart() {
   // copy array and reverse it
-  const reversed = transactions.slice().reverse();
+  const notReversed = transactions;
   let sum = 0;
 
+  console.log(transactions);
+
   // create date labels for chart
-  const labels = reversed.map(t => {
+  const labels = notReversed.map(t => {
     const date = new Date(t.date);
     return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
   });
 
 
   // create incremental values for chart
-  const data = reversed.map(t => {
+  const data = notReversed.map(t => {
     sum += parseInt(t.calories);
     return sum;
   });
