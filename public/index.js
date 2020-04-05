@@ -16,7 +16,7 @@ fetch("/api/workouts")
             <h4 class="card-title">${workout.name}</h4>
           </div>
           <div class="card-footer text-center">
-            <a href="#" class="btn btn-primary mt-2">Log</a>
+            <a href="/log" class="btn btn-primary mt-2">Log</a>
             <a href="/workout?workout_id=${workout._id}" class="btn btn-primary mt-2">Edit</a>
           </div>
         </div>

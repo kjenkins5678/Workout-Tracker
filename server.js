@@ -31,6 +31,7 @@ app.post("/api/new/workouts", ({ body }, res) => {
     });
 });
 
+// Add new exercises
 app.post("/api/new/exercise/:_id", (req, res) => {
   db.Exercise.create(req.body)
     .then(newExerciseObject => db.Workout.findOneAndUpdate({"_id" : req.params._id}, { $push: { exercises: newExerciseObject._id } }, { new: true }))
@@ -42,7 +43,7 @@ app.post("/api/new/exercise/:_id", (req, res) => {
     });
 });
 
-//Get a workout by id and populate it with its exercises
+// Populate workout log
 app.post("/api/new/log/:_id", function(req, res){
   db.Workout.aggregate([
     {$match: {"_id": mongoose.Types.ObjectId(req.params._id)}},
@@ -109,6 +110,15 @@ app.get("/api/workouts/:_id", function(req, res){
     });
 });
 
+app.get("/api/log", function(req, res){
+  db.Log.find({})
+    .then(log => {
+      res.json(log);
+    }).catch(err => {
+      res.status(400).json(err);
+    });
+});
+
 // delete api routes ******************************************************
 
 //Find a workout by id and delete all exercises associated with it and delete the workout
@@ -162,6 +172,10 @@ app.get("/workout", function(req, res) {
 
 app.get("/workout/edit", function(req, res) {
   res.sendFile(path.join(__dirname, "./public/newWorkout.html"));
+});
+
+app.get("/log", function(req, res) {
+  res.sendFile(path.join(__dirname, "./public/log.html"));
 });
 
 //start server on port ******************************************************
