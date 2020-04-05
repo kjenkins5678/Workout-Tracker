@@ -120,6 +120,19 @@ app.get("/api/log", function(req, res){
     });
 });
 
+app.get("/api/log/agg", function(req, res){
+  db.Log.aggregate([
+    {$project: { _id: 1, date: {$dateToString: {format: "%Y-%m-%d", date: "$date"}}, calories: 1}},
+    {$group: {_id : "$date", totalCalories: {$sum: "$calories"}}}
+  ])
+    .then(log => {
+      res.json(log);
+    }).catch(err => {
+      res.status(400).json(err);
+    });
+});
+
+
 // delete api routes ******************************************************
 
 //Find a workout by id and delete all exercises associated with it and delete the workout
