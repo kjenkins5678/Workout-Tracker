@@ -43,7 +43,7 @@ app.post("/api/new/exercise/:_id", (req, res) => {
 });
 
 //Get a workout by id and populate it with its exercises
-app.get("/api/new/log/:_id", function(req, res){
+app.post("/api/new/log/:_id", function(req, res){
   db.Workout.aggregate([
     {$match: {"_id": mongoose.Types.ObjectId(req.params._id)}},
     {$lookup: {from: "exercises", localField: "exercises", foreignField: "_id", as: "exercise"}},
@@ -51,8 +51,11 @@ app.get("/api/new/log/:_id", function(req, res){
     {$project: {_id: 0, name: 1, calories: "$exercise.calories"}},
     {$group: {_id : "$name", totalCalories: {$sum: "$calories"}}}
   ])
-    .then(result => {
-      res.json(result);
+    .then(aggResult => db.Log.create({
+      name: aggResult[0]._id,
+      calories: aggResult[0].totalCalories
+    })).then(dbLog => {
+      res.json(dbLog);
     })
     .catch(err => {
       res.json(err);
